@@ -1,11 +1,13 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 create table if not exists product
 (
-    id           uuid           not null,
-    title        varchar(30)    not null,
-    brand        varchar(30)    not null,
-    image        varchar(100)   not null,
-    price        numeric(10, 2) not null,
-    review_score numeric(2, 2)  not null
+    id           uuid             not null,
+    title        varchar(30)      not null,
+    brand        varchar(30)      not null,
+    image        varchar(100)     not null,
+    price        numeric(10, 2)   not null,
+    review_score double precision not null
 );
 
 ALTER TABLE ONLY product
