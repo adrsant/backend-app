@@ -1,14 +1,14 @@
 package com.luizalabs.exception;
 
-public class FoundEntityException extends RuntimeException {
+public class ClientFoundException extends RuntimeException {
 
   private static final long serialVersionUID = 8625982241477310408L;
 
-  public FoundEntityException() {
+  public ClientFoundException() {
     super();
   }
 
-  public FoundEntityException(String message) {
+  public ClientFoundException(String message) {
     super(message);
   }
 }
