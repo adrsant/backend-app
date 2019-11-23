@@ -1,5 +1,5 @@
 insert into client (id, name, email)
-values ('10a859f9-19fe-4f1f-8aba-3009c44a9e17', 'teste-name', 'teste@gmail.com');
+values ('10a859f9-19fe-4f1f-8aba-3009c44a9e17', 'teste-name', 'teste1@gmail.com');
 
 
 insert into client (id, name, email)
