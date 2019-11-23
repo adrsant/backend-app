@@ -24,7 +24,7 @@ public class ClientApplication {
   }
 
   public void delete(UUID id) {
-    if (repository.existsById(id)) {
+    if (!repository.existsById(id)) {
       throw new ResourceNotFoundException();
     }
     repository.deleteById(id);
@@ -34,7 +34,7 @@ public class ClientApplication {
   public void update(Client client) {
     validations.forEach(v -> v.check(client));
     repository.save(client);
-    log.info("SAVE NEW CLIENT");
+    log.info("SCLIENT HAS BEEN UPDATED ID {}", client.getId());
   }
 
   public Client find(UUID id) {

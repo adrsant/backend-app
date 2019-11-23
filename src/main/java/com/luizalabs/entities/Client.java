@@ -8,10 +8,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Builder
@@ -19,11 +22,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table
+@EqualsAndHashCode(of = "email")
 public class Client {
-
-  @Id private UUID id;
-  private String name;
-  private String email;
+  @Setter @Id private UUID id;
+  @NotBlank private String name;
+  @NotBlank private String email;
 
   @ManyToMany
   @JoinTable(
