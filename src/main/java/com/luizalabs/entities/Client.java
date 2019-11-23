@@ -3,6 +3,8 @@ package com.luizalabs.entities;
 import java.util.Set;
 import java.util.UUID;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -15,6 +17,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Getter
 @Builder
@@ -24,7 +28,18 @@ import lombok.Setter;
 @Table
 @EqualsAndHashCode(of = "email")
 public class Client {
-  @Setter @Id private UUID id;
+  @Setter
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO, generator = "pg-uuid")
+  @GenericGenerator(
+      name = "pg-uuid",
+      strategy = "uuid2",
+      parameters =
+          @Parameter(
+              name = "uuid_gen_strategy_class",
+              value = "com.luizalabs.infra.postgres.PostgreSQLUUIDGenerationStrategy"))
+  private UUID id;
+
   @NotBlank private String name;
   @NotBlank private String email;
 
