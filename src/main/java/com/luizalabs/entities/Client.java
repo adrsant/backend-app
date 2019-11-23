@@ -1,6 +1,5 @@
 package com.luizalabs.entities;
 
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import javax.persistence.Entity;
@@ -27,8 +26,9 @@ public class Client {
   private String email;
 
   @ManyToMany
-  @JoinTable(name="client_product", joinColumns=
-      {@JoinColumn(name="client_id")}, inverseJoinColumns=
-      {@JoinColumn(name="product_id")})
+  @JoinTable(
+      name = "client_product",
+      joinColumns = {@JoinColumn(name = "client_id")},
+      inverseJoinColumns = {@JoinColumn(name = "product_id")})
   private Set<Product> products;
 }
