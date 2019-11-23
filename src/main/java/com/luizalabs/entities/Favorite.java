@@ -1,6 +1,5 @@
 package com.luizalabs.entities;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,12 +15,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table
-public class Product {
+public class Favorite {
 
-  @Id private UUID id;
-  private String title;
-  private String brand;
-  private String image;
-  private BigDecimal price;
-  private Double reviewScore;
+  @Id private UUID clientId;
+  @Id private UUID productId;
 }

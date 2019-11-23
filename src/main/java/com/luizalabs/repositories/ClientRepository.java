@@ -1,7 +1,7 @@
 package com.luizalabs.repositories;
 
 import com.luizalabs.entities.Client;
-import com.luizalabs.entities.Product;
+import com.luizalabs.entities.Favorite;
 import java.util.Collection;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,5 +18,5 @@ public interface ClientRepository extends JpaRepository<Client, UUID> {
   boolean exists(UUID id, String email);
 
   @Query("select products from Client c where c.id = :clientId")
-  Collection<Product> findProductsOfClient(UUID clientId);
+  Collection<Favorite> findProductsOfClient(UUID clientId);
 }

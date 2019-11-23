@@ -6,9 +6,9 @@ import com.luizalabs.test.AbstractTestRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class ProductRepositoryTest extends AbstractTestRepository {
+public class FavoriteRepositoryTest extends AbstractTestRepository {
 
-  @Autowired private ProductRepository repository;
+  @Autowired private FavoriteRepository repository;
 
   @Test
   public void testStartup() {

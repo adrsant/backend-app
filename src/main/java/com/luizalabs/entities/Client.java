@@ -52,5 +52,5 @@ public class Client {
       name = "client_product",
       joinColumns = {@JoinColumn(name = "client_id")},
       inverseJoinColumns = {@JoinColumn(name = "product_id")})
-  private Set<Product> products;
+  private Set<Favorite> favorites;
 }

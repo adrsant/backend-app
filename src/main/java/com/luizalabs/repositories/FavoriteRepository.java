@@ -1,7 +1,7 @@
 package com.luizalabs.repositories;
 
-import com.luizalabs.entities.Product;
+import com.luizalabs.entities.Favorite;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProductRepository extends JpaRepository<Product, UUID> {}
+public interface FavoriteRepository extends JpaRepository<Favorite, UUID> {}
