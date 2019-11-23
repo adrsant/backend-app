@@ -1,0 +1,27 @@
+server:
+  port: 8888
+spring:
+  profiles:
+    active: test
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: ${DB_USERNAME}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+  flyway:
+    enabled: true
+    locations: filesystem:migration
+    password: ${DB_USERNAME}
+    url: ${DB_URL}
+    user: ${DB_USERNAME}
+  jpa:
+    hibernate:
+      ddl-auto: none
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      format_sql: false
+      naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      show_sql: false
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false

@@ -1,0 +1,39 @@
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: health,prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      idle-timeout: 300000
+      max-lifetime: 1200000
+      maximum-pool-size: 5
+      minimum-idle: 2
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/backend_app
+    username: postgres
+  flyway:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: none
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      format_sql: false
+      naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      show_sql: false
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
