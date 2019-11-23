@@ -11,9 +11,7 @@ public class ProductRepositoryTest extends AbstractTestRepository {
   @Autowired private ProductRepository repository;
 
   @Test
-  public void testStartup(){
+  public void testStartup() {
     assertThat(repository.findAll()).isEmpty();
   }
-
-
 }
