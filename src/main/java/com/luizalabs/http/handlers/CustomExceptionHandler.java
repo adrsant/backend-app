@@ -1,6 +1,7 @@
 package com.luizalabs.http.handlers;
 
 import com.luizalabs.exception.EmailClientFoundException;
+import com.luizalabs.exception.ProductInvalidException;
 import com.luizalabs.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +27,13 @@ public class CustomExceptionHandler {
   @ExceptionHandler(EmailClientFoundException.class)
   @ResponseBody
   public ErroMessage onErrorConvertProperty(EmailClientFoundException exception) {
+    return new ErroMessage(exception.getMessage());
+  }
+
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler(ProductInvalidException.class)
+  @ResponseBody
+  public ErroMessage onErrorConvertProperty(ProductInvalidException exception) {
     return new ErroMessage(exception.getMessage());
   }
 }

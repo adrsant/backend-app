@@ -9,14 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ClientRepository extends JpaRepository<Client, UUID> {
 
-  @Query(
-      "select (count(c) > 0) from Client c where c.email = :email")
+  @Query("select (count(c) > 0) from Client c where c.email = :email")
   boolean exists(String email);
 
-  @Query(
-      "select (count(c) > 0) from Client c where :id <> c.id and c.email = :email")
+  @Query("select (count(c) > 0) from Client c where :id <> c.id and c.email = :email")
   boolean exists(UUID id, String email);
-
-  @Query("select products from Client c where c.id = :clientId")
-  Collection<Favorite> findProductsOfClient(UUID clientId);
 }

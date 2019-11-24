@@ -1,6 +1,8 @@
 package com.luizalabs.application.favorite;
 
 import com.luizalabs.entities.Favorite;
+import com.luizalabs.exception.ProductInvalidException;
+import com.luizalabs.infra.eai.FindProductIntegration;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -8,6 +10,14 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 class ProductEnabledValidation implements FavoriteCustomValidation {
 
+  private FindProductIntegration integration;
+
   @Override
-  public void check(Favorite favorite) {}
+  public void check(Favorite favorite) {
+    boolean isEnabled = integration.execute(favorite.getProductId());
+
+    if(!isEnabled){
+      throw new ProductInvalidException("product not found!");
+    }
+  }
 }

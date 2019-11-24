@@ -46,16 +46,4 @@ public class ClientRepositoryTest extends AbstractTestRepository {
                 UUID.fromString("1ba100b0-d568-4bb9-838e-c8139852cc5c"), "teste1@gmail.com"))
         .isTrue();
   }
-
-  @Test
-  public void should_have_products() {
-    UUID clientId = UUID.fromString("1ba100b0-d568-4bb9-838e-c8139852cc5c");
-    assertThat(repository.findProductsOfClient(clientId)).hasSize(1);
-  }
-
-  @Test
-  public void should_dont_have_products() {
-    UUID clientId = UUID.fromString("10a859f9-19fe-4f1f-8aba-3009c44a9e17");
-    assertThat(repository.findProductsOfClient(clientId)).isEmpty();
-  }
 }
