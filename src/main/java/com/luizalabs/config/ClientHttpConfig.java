@@ -13,10 +13,10 @@ import org.springframework.web.client.RestTemplate;
 public class ClientHttpConfig {
 
   @Value("${products-api.timeout.read}")
-  private long readTimeout = 2000;
+  private long readTimeout;
 
   @Value("${products-api.timeout.connection}")
-  private long connectionTimeout = 500;
+  private long connectionTimeout;
 
   @Bean
   public RestTemplate restTemplate(RestTemplateBuilder builder) {
