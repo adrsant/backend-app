@@ -1,6 +1,8 @@
 package com.luizalabs.application.favorite;
 
 import com.luizalabs.entities.Favorite;
+import com.luizalabs.entities.pk.FavoritePK;
+import com.luizalabs.exception.ResourceNotFoundException;
 import com.luizalabs.repositories.FavoriteRepository;
 import java.util.Collection;
 import java.util.List;
@@ -29,7 +31,16 @@ public class FavoriteApplication {
   }
 
   public void delete(Favorite favorite) {
-    repository.delete(favorite);
+    var pk =
+        FavoritePK.builder()
+            .clientId(favorite.getClientId())
+            .productId(favorite.getProductId())
+            .build();
+
+    if (!repository.existsById(pk)) {
+      throw new ResourceNotFoundException("favorite not found!");
+    }
+    repository.deleteById(pk);
 
     log.info(
         "CLIENT ID {} HAS BEEN REMOVED PRODUCT ID {} FROM FAVORITES LIST  ",
