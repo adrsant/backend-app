@@ -7,6 +7,7 @@ import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 import com.luizalabs.entities.Favorite;
 import com.luizalabs.entities.pk.FavoritePK;
@@ -18,6 +19,7 @@ import java.util.UUID;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -36,10 +38,11 @@ public class FavoriteApplicationTest {
   public void should_add_favorite_product() {
     var favorite =
         Favorite.builder().productId(UUID.randomUUID()).clientId(UUID.randomUUID()).build();
+    ArgumentCaptor<Favorite> argCaptor = ArgumentCaptor.forClass(Favorite.class);
     doNothing().when(customValidation).check(favorite);
 
     application.add(favorite);
-
+    verify(customValidation).check(argCaptor.capture());
     then(repository).should().save(favorite);
   }
 
@@ -49,8 +52,7 @@ public class FavoriteApplicationTest {
         Favorite.builder().productId(UUID.randomUUID()).clientId(UUID.randomUUID()).build();
     doThrow(ProductInvalidException.class).when(customValidation).check(favorite);
 
-    assertThatThrownBy(() -> application.add(favorite))
-        .isInstanceOf(ProductInvalidException.class);
+    assertThatThrownBy(() -> application.add(favorite)).isInstanceOf(ProductInvalidException.class);
 
     then(repository).should(never()).save(favorite);
   }
@@ -66,8 +68,27 @@ public class FavoriteApplicationTest {
             .productId(favorite.getProductId())
             .build();
 
+    given(repository.existsById(pk)).willReturn(true);
+
     application.delete(favorite);
-    repository.deleteById(pk);
+    then(repository).should().deleteById(pk);
+  }
+
+  @Test
+  public void should_not_delete_favorite() {
+    var favorite =
+        Favorite.builder().productId(UUID.randomUUID()).clientId(UUID.randomUUID()).build();
+
+    var pk =
+        FavoritePK.builder()
+            .clientId(favorite.getClientId())
+            .productId(favorite.getProductId())
+            .build();
+    given(repository.existsById(pk)).willReturn(false);
+
+    assertThatThrownBy(() -> application.delete(favorite)).isInstanceOf(RuntimeException.class);
+
+    then(repository).should(never()).deleteById(pk);
   }
 
   @Test

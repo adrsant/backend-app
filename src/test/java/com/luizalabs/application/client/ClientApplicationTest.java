@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -36,7 +37,7 @@ public class ClientApplicationTest {
   public void should_create_client() {
     var client = Client.builder().email("teste@teste.com").build();
     ArgumentCaptor<Client> argCaptor = ArgumentCaptor.forClass(Client.class);
-
+    doNothing().when(customValidation).check(client);
     application.create(client);
     verify(customValidation).check(argCaptor.capture());
 
