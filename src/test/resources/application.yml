@@ -26,3 +26,9 @@ spring:
         temp:
           use_jdbc_metadata_defaults: false
     open-in-view: false
+
+products-api:
+  timeout:
+    read: 200
+    connection: 100
+  find-endpoint: http://mock-server/producs/

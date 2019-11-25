@@ -19,7 +19,7 @@ public class ClientHttpConfig {
   private long connectionTimeout;
 
   @Bean
-  public RestTemplate restTemplate(RestTemplateBuilder builder) {
+  public RestTemplate apiProducts(RestTemplateBuilder builder) {
     return builder
         .setConnectTimeout(Duration.ofMillis(connectionTimeout))
         .setReadTimeout(Duration.ofMillis(readTimeout))
