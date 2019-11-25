@@ -25,7 +25,7 @@ public class ClientApplication {
 
   public void delete(UUID id) {
     if (!repository.existsById(id)) {
-      throw new ResourceNotFoundException();
+      throw new ResourceNotFoundException("client not found!");
     }
     repository.deleteById(id);
     log.info("CLIENT HAS BEEN DELETED ID {}", id);
@@ -38,6 +38,6 @@ public class ClientApplication {
   }
 
   public Client find(UUID id) {
-    return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException());
+    return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("client not found!"));
   }
 }

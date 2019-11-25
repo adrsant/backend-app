@@ -1,15 +1,11 @@
 package com.luizalabs.entities;
 
-import java.util.Set;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -46,11 +42,4 @@ public class Client {
   private String name;
 
   @NotBlank private String email;
-
-  @ManyToMany
-  @JoinTable(
-      name = "client_product",
-      joinColumns = {@JoinColumn(name = "client_id")},
-      inverseJoinColumns = {@JoinColumn(name = "product_id")})
-  private Set<Product> products;
 }

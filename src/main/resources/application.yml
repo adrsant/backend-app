@@ -37,3 +37,9 @@ spring:
       hibernate:
         temp:
           use_jdbc_metadata_defaults: false
+
+products-api:
+  timeout:
+    read: 2000
+    connection: 1000
+  find-endpoint: http://challenge-api.luizalabs.com/api/product/

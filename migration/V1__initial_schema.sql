@@ -25,18 +25,14 @@ ALTER TABLE ONLY client
 
 CREATE INDEX /*CONCURRENTLY*/ email on client (email);
 
-create table if not exists client_product
+create table if not exists favorite
 (
     client_id  uuid not null,
     product_id uuid not null
 );
 
-ALTER TABLE ONLY client_product
-    ADD CONSTRAINT client_product_pk PRIMARY KEY (client_id, product_id);
+ALTER TABLE ONLY favorite
+    ADD CONSTRAINT favorite_pk PRIMARY KEY (client_id, product_id);
 
-ALTER TABLE client_product
-    ADD CONSTRAINT fk_client_product_prod FOREIGN KEY (product_id) REFERENCES product (id);
-ALTER TABLE client_product
-    ADD CONSTRAINT fk_client_product_cli FOREIGN KEY (client_id) REFERENCES client (id);
-
-CREATE INDEX /*CONCURRENTLY*/ client_product_idx on client_product (client_id);
+ALTER TABLE favorite
+    ADD CONSTRAINT fk_favorite_client FOREIGN KEY (client_id) REFERENCES client (id);
