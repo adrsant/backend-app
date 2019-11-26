@@ -40,6 +40,8 @@ public class FindProductIntegration {
     } catch (RestClientException ex) {
       if (!(ex instanceof HttpClientErrorException)) {
         log.warn("ERROR ON INTEGRATION TO PRODUCTS API", ex);
+      }else{
+       statusCode = HttpStatus.valueOf(((HttpClientErrorException) ex).getRawStatusCode());
       }
     }
 

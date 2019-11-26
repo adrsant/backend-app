@@ -4,11 +4,12 @@ import com.luizalabs.entities.Favorite;
 import com.luizalabs.entities.pk.FavoritePK;
 import com.luizalabs.exception.ResourceNotFoundException;
 import com.luizalabs.repositories.FavoriteRepository;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -48,7 +49,7 @@ public class FavoriteApplication {
         favorite.getProductId());
   }
 
-  public Collection<Favorite> find(UUID clientId) { // TODO create pagination
-    return repository.findByClientId(clientId);
+  public Slice<Favorite> find(UUID clientId, Pageable pageable) {
+    return repository.findByClientId(clientId, pageable);
   }
 }

@@ -1,12 +1,13 @@
 package com.luizalabs.infra.eai;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.then;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 
 import com.google.common.base.Charsets;
+import com.luizalabs.exception.IntegrationException;
 import com.luizalabs.test.AbstractIntegrationTest;
 import java.net.URI;
 import java.util.UUID;
@@ -51,6 +52,17 @@ public class FindProductIntegrationTest extends AbstractIntegrationTest {
     server.verify();
   }
 
+  @Test
+  public void should_not_found_product_error() throws Exception {
+    UUID productId = UUID.randomUUID();
+    var server = mockGetError(productId);
+
+    assertThatThrownBy(() -> integration.execute(productId))
+        .isInstanceOf(IntegrationException.class);
+
+    server.verify();
+  }
+
   private MockRestServiceServer mockGetOK(UUID uuid) throws Exception {
     String json =
         StreamUtils.copyToString(
@@ -61,6 +73,10 @@ public class FindProductIntegrationTest extends AbstractIntegrationTest {
 
   private MockRestServiceServer mockGetNotFound(UUID uuid) throws Exception {
     return configureMock(uuid, HttpMethod.GET, "", HttpStatus.NOT_FOUND);
+  }
+
+  private MockRestServiceServer mockGetError(UUID uuid) throws Exception {
+    return configureMock(uuid, HttpMethod.GET, "", HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   private MockRestServiceServer configureMock(

@@ -13,7 +13,6 @@ import com.luizalabs.entities.Favorite;
 import com.luizalabs.entities.pk.FavoritePK;
 import com.luizalabs.exception.ProductInvalidException;
 import com.luizalabs.repositories.FavoriteRepository;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import org.junit.Before;
@@ -22,6 +21,9 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.SliceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FavoriteApplicationTest {
@@ -94,14 +96,15 @@ public class FavoriteApplicationTest {
   @Test
   public void should_find_list_favorites() {
     UUID clientId = UUID.randomUUID();
-    List<Favorite> favorites = List.of(Favorite.builder().build());
+    Slice<Favorite> favorites = new SliceImpl(List.of(Favorite.builder().build()));
+    var pageRequest = PageRequest.of(1, 5);
 
-    given(repository.findByClientId(clientId)).willReturn(favorites);
+    given(repository.findByClientId(clientId, pageRequest)).willReturn(favorites);
 
-    Collection<Favorite> favoriteList = application.find(clientId);
+    Slice<Favorite> favoriteList = application.find(clientId, pageRequest);
 
     assertThat(favorites).isSameAs(favoriteList);
 
-    then(repository).should().findByClientId(clientId);
+    then(repository).should().findByClientId(clientId, pageRequest);
   }
 }
