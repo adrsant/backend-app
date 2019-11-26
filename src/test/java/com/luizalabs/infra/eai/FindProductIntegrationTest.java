@@ -51,17 +51,6 @@ public class FindProductIntegrationTest extends AbstractIntegrationTest {
     server.verify();
   }
 
-  @Test
-  public void should_not_found_product_error() throws Exception {
-    UUID productId = UUID.randomUUID();
-    var server = mockGetError(productId);
-    boolean exist = integration.execute(productId);
-
-    then(integration).should().onError(productId);
-    assertThat(exist).isFalse();
-    server.verify();
-  }
-
   private MockRestServiceServer mockGetOK(UUID uuid) throws Exception {
     String json =
         StreamUtils.copyToString(
@@ -72,10 +61,6 @@ public class FindProductIntegrationTest extends AbstractIntegrationTest {
 
   private MockRestServiceServer mockGetNotFound(UUID uuid) throws Exception {
     return configureMock(uuid, HttpMethod.GET, "", HttpStatus.NOT_FOUND);
-  }
-
-  private MockRestServiceServer mockGetError(UUID uuid) throws Exception {
-    return configureMock(uuid, HttpMethod.GET, "", HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   private MockRestServiceServer configureMock(

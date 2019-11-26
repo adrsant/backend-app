@@ -40,6 +40,6 @@ spring:
 
 products-api:
   timeout:
-    read: 2000
+    read: 1500
     connection: 1000
   find-endpoint: http://challenge-api.luizalabs.com/api/product/

@@ -1,7 +1,6 @@
 package com.luizalabs.infra.eai;
 
 import com.luizalabs.exception.IntegrationException;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import java.net.URI;
 import java.util.UUID;
 import lombok.NonNull;
@@ -9,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +27,10 @@ public class FindProductIntegration { // TODO VALIDAR TIMEOUT
   @Autowired private RestTemplate template;
 
   @Transactional(propagation = Propagation.NEVER)
-  @HystrixCommand(fallbackMethod = "onError", commandKey = "FIND_PRODUCT")
+  @Retryable(
+      maxAttempts = 2,
+      value = IntegrationException.class,
+      backoff = @Backoff(delay = 1500))
   public boolean execute(@NonNull final UUID productId) {
     URI uri = URI.create(endpoint + productId);
     HttpStatus statusCode = null;
@@ -43,12 +47,8 @@ public class FindProductIntegration { // TODO VALIDAR TIMEOUT
       throw new IntegrationException();
     }
 
-    log.warn("FOUND PRODUCT ID {} ON API", productId);
+    log.info("FOUND PRODUCT ID {} ON API", productId);
 
     return HttpStatus.OK == statusCode;
-  }
-
-  public boolean onError(UUID id) {
-    return false;
   }
 }
