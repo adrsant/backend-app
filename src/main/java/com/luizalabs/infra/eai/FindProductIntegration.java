@@ -19,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 @Slf4j
-public class FindProductIntegration { // TODO VALIDAR TIMEOUT
+public class FindProductIntegration {
 
   @Value("${products-api.find-endpoint}")
   private String endpoint;
