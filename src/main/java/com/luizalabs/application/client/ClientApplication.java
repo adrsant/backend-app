@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -17,6 +19,7 @@ public class ClientApplication {
   private List<ClientCustomValidation> validations;
   private ClientRepository repository;
 
+  @PreAuthorize("hasRole('ADMIN')")
   public void create(Client client) {
     validations.forEach(v -> v.check(client));
     repository.save(client);
@@ -38,6 +41,8 @@ public class ClientApplication {
   }
 
   public Client find(UUID id) {
-    return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("client not found!"));
+    return repository
+        .findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("client not found!"));
   }
 }
