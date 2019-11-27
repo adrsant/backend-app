@@ -2,9 +2,13 @@ package com.luizalabs.http;
 
 import com.luizalabs.application.client.ClientApplication;
 import com.luizalabs.entities.Client;
+import com.luizalabs.http.dto.ClientsDTO;
+import com.luizalabs.http.dto.MetaDataDTO;
 import java.util.UUID;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,5 +51,19 @@ public class ClientController {
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Client find(@PathVariable UUID id) {
     return application.find(id);
+  }
+
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  public ClientsDTO findAll(@Min(1) @RequestParam int page) {
+    var pageRequest = PageRequest.of(page - 1, 10);
+    var clients = application.find(pageRequest);
+    return ClientsDTO.builder()
+        .meta(
+            MetaDataDTO.builder()
+                .pageNumber(clients.getNumber() + 1)
+                .pageSize(clients.getSize())
+                .build())
+        .clients(clients.getContent())
+        .build();
   }
 }

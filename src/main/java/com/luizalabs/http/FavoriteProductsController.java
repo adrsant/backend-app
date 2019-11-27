@@ -2,6 +2,8 @@ package com.luizalabs.http;
 
 import com.luizalabs.application.favorite.FavoriteApplication;
 import com.luizalabs.entities.Favorite;
+import com.luizalabs.http.dto.FavoritesDTO;
+import com.luizalabs.http.dto.MetaDataDTO;
 import java.util.UUID;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -45,7 +47,7 @@ public class FavoriteProductsController {
     var pageRequest = PageRequest.of(page - 1, 10);
     var ids = application.find(clientId, pageRequest).map(Favorite::getProductId);
     return FavoritesDTO.builder()
-        .meta(MetaData.builder().pageNumber(ids.getNumber() + 1).pageSize(ids.getSize()).build())
+        .meta(MetaDataDTO.builder().pageNumber(ids.getNumber() + 1).pageSize(ids.getSize()).build())
         .products(ids.getContent())
         .build();
   }
