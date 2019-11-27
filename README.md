@@ -5,6 +5,12 @@
 
 Link para swagger: `http://localhost:8080/swagger-ui.html`
 
+
+Requesitos:
+- JAVA 11
+- POSTGRES
+
+
 Passos para iniciar o backend:
 - Instalar postgres local e criar banco de dados `backend_app`
 
