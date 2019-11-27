@@ -28,20 +28,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/api/*")
         .authenticated()
         .and()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
-        // filtra requisições de login
         .addFilterBefore(
             new JWTLoginFilter("/auth", authenticationManager()),
             UsernamePasswordAuthenticationFilter.class)
-
-        // filtra outras requisições para verificar a presença do JWT no header
         .addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
   }
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    // cria uma conta default
     auth.inMemoryAuthentication()
         .withUser("admin")
         .password("{noop}password")
@@ -52,4 +49,3 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .roles("CLIENT");
   }
 }
-

@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @Valid
-@RequestMapping("api/clients/{clientId}/favorite-products")
+@RequestMapping("/api/clients/{clientId}/favorite-products")
 public class FavoriteProductsController {
 
   private FavoriteApplication application;

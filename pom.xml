@@ -22,6 +22,7 @@
     <test-conteiner.version>1.11.3</test-conteiner.version>
     <prometheus-simpleclient_hotspot.version>0.6.0</prometheus-simpleclient_hotspot.version>
     <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
+    <jwt.version>0.7.0</jwt.version>
   </properties>
 
   <dependencyManagement>
@@ -56,6 +57,10 @@
           <artifactId>undertow-websockets-jsr</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -126,13 +131,14 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-security</artifactId>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt</artifactId>
-      <version>0.7.0</version>
+      <version>${jwt.version}</version>
     </dependency>
     <dependency>
       <groupId>org.testng</groupId>
