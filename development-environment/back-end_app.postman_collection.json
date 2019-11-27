@@ -1,0 +1,355 @@
+{
+	"info": {
+		"_postman_id": "c1f788ed-5528-421d-ad0e-bb2b77425800",
+		"name": "back-end_app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "FIND_PRODUCT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://challenge-api.luizalabs.com/api/product/1bf0f365-fbdd-4e21-9786-da459d78dd1f",
+							"protocol": "http",
+							"host": [
+								"challenge-api",
+								"luizalabs",
+								"com"
+							],
+							"path": [
+								"api",
+								"product",
+								"1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST_PRODUCT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://challenge-api.luizalabs.com/api/product/?page=1",
+							"protocol": "http",
+							"host": [
+								"challenge-api",
+								"luizalabs",
+								"com"
+							],
+							"path": [
+								"api",
+								"product",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "clients",
+			"item": [
+				{
+					"name": "favorite products",
+					"item": [
+						{
+							"name": "LIST FAVORITE_PRODUCTS",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Authorization",
+										"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjbGllbnQiLCJleHAiOjE1NzU2MDQ1Nzl9.nP4J9b6v8yHiTkMGa-61HWVzhKXh7mq2ulqcHZy4HvTLJVf1daJL9GZ_hOw7IPF_mZyOeGeASWgSkNL36XhMgA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/clients/1ba100b0-d568-4bb9-838e-c8139852cc5c/favorite-products?page=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"clients",
+										"1ba100b0-d568-4bb9-838e-c8139852cc5c",
+										"favorite-products"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ADD FAVORITE",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/clients/1ba100b0-d568-4bb9-838e-c8139852cc5c/favorite-products/1bf0f365-fbdd-4e21-9786-da459d78dd1f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"clients",
+										"1ba100b0-d568-4bb9-838e-c8139852cc5c",
+										"favorite-products",
+										"1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE FAVORITE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/clients/1ba100b0-d568-4bb9-838e-c8139852cc5c/favorite-products/1bf0f365-fbdd-4e21-9786-da459d78dd1f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"clients",
+										"1ba100b0-d568-4bb9-838e-c8139852cc5c",
+										"favorite-products",
+										"1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "FIND_CLIENT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/clients/1ba100b0-d568-4bb9-838e-c8139852cc5c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clients",
+								"1ba100b0-d568-4bb9-838e-c8139852cc5c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST CLIENTS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Authorization",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU3NTY4MDM4Miwicm9sIjpbIlJPTEVfQURNSU4iXX0.4qCHFbA4lBRMXRY_XYbDRIiil2XpszRn13L6Jsbg9QrAdvE5shH-Stdnlpvlqpg2-rTcxZR5AKHjpVp7LXK4HQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/clients?page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clients"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE_CLIENT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Authorization",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU3NTY4MDM4Miwicm9sIjpbIlJPTEVfQURNSU4iXX0.4qCHFbA4lBRMXRY_XYbDRIiil2XpszRn13L6Jsbg9QrAdvE5shH-Stdnlpvlqpg2-rTcxZR5AKHjpVp7LXK4HQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"teste-name\",\n    \"email\": \"teste4@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/clients/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clients",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE_CLIENT",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/clients/8a532fa5-93be-4f3d-a1e5-1aa0f5df14c3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clients",
+								"8a532fa5-93be-4f3d-a1e5-1aa0f5df14c3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "auth",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "CLIENT AUTH",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"client\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN AUTH",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
