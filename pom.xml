@@ -158,6 +158,14 @@
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>0.8.5</version>
+        <configuration>
+          <excludes>
+            <exclude>**/*Config.*</exclude>
+            <exclude>**/Application.*</exclude>
+            <exclude>com/luizalabs/infra/postgres/*</exclude>
+            <exclude>com/luizalabs/infra/security/*</exclude>
+          </excludes>
+        </configuration>
         <executions>
           <execution>
             <goals>
