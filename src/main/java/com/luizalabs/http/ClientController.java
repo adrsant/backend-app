@@ -61,7 +61,7 @@ public class ClientController {
         .meta(
             MetaDataDTO.builder()
                 .pageNumber(clients.getNumber() + 1)
-                .pageSize(clients.getSize())
+                .pageSize(clients.getNumberOfElements())
                 .build())
         .clients(clients.getContent())
         .build();

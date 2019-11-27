@@ -47,7 +47,10 @@ public class FavoriteProductsController {
     var pageRequest = PageRequest.of(page - 1, 10);
     var ids = application.find(clientId, pageRequest).map(Favorite::getProductId);
     return FavoritesDTO.builder()
-        .meta(MetaDataDTO.builder().pageNumber(ids.getNumber() + 1).pageSize(ids.getSize()).build())
+        .meta(MetaDataDTO.builder()
+            .pageNumber(ids.getNumber() + 1)
+            .pageSize(ids.getNumberOfElements())
+            .build())
         .products(ids.getContent())
         .build();
   }
