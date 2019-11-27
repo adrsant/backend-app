@@ -31,6 +31,6 @@ mvnw.cmd spring-boot:run
 ```
 
 
-para acessar a api devemos efetuar a autenticacao, temos dois user, client e admin.
-todas a request estao mapeadas no projeto postman: `development-environment/back-end_app.postman_collection.json`
+para acessar a api devemos efetuar a autenticaçao, temos dois user, `client` e `admin`.
+todas a requests estao mapeadas no projeto do postman: `development-environment/back-end_app.postman_collection.json`
 
