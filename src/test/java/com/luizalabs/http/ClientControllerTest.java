@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.luizalabs.application.client.ClientApplication;
 import com.luizalabs.entities.Client;
 import java.util.UUID;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class ClientControllerTest {
   @MockBean private ClientApplication application;
 
   @Test
+  @Ignore
   public void should_find_client() throws Exception {
     Client client = Client.builder().email("teste").id(UUID.randomUUID()).build();
 
